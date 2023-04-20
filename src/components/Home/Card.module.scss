@@ -1,0 +1,204 @@
+.main {
+  font-family: "Jost";
+  padding: 20px 8%;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  span {
+    font-family: "Jost";
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 31px;
+    color: #000000;
+  }
+  h3 {
+    margin-top: 10px;
+    font-family: "Jost";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+  }
+  h4 {
+    margin-top: 10px;
+
+    font-family: "Jost";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    h5 {
+      font-family: "Jost";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 37px;
+      // text-align: right;
+    }
+    a {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 21px;
+      color: #009b95;
+    }
+
+    .card {
+      padding: 30px;
+      width: 376px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      h5 {
+        font-family: "Jost";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        // text-align: right;
+      }
+    }
+    .carde {
+      padding: 30px;
+      background: #ffffff;
+      box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 1em;
+    }
+    .flex {
+      width: 200px;
+      display: flex;
+      gap: 20px;
+    }
+    .card1 {
+      padding: 30px;
+      justify-content: space-between;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+    }
+    .qwe {
+      width: 240px;
+    }
+  }
+
+  a {
+    margin-top: 10px;
+
+    font-family: "Jost";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    color: #009b95;
+  }
+  .one {
+    margin-top: 30px;
+    .card_one {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 10px;
+      background: #ffffff;
+      box-shadow: -3px -1px 9px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      padding: 35px 15px;
+      img {
+        width: 250px;
+        height: 140px;
+      }
+      .card_text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h3 {
+          margin-top: 10px;
+          font-family: "Jost";
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 26px;
+        }
+        h4 {
+          margin-top: 10px;
+
+          font-family: "Jost";
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 21px;
+        }
+        a {
+          margin-top: 10px;
+
+          font-family: "Jost";
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 21px;
+          color: #009b95;
+        }
+      }
+    }
+    .card {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .cards_two {
+    img {
+      width: 270px;
+    }
+    display: flex;
+    justify-content: space-between;
+    .card_two {
+      width: 30%;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      box-shadow: -3px -1px 9px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      padding: 35px 15px;
+    }
+  }
+  .three{
+    margin-top: 40px;
+  }
+  .three_cards {
+    display: flex;
+    justify-content: space-between;
+    .three_card {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #ffffff;
+      box-shadow: -3px -1px 9px rgba(0, 0, 0, 0.05),
+        1px 1px 9px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      padding: 35px 40px;
+      
+      img {
+        width: 250px;
+        height: 270px;
+      }
+    }
+  }
+}
