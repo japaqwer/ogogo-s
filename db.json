@@ -1,0 +1,33 @@
+{
+  "produts": [
+    {
+      "id": 1,
+      "title": "aktan",
+      "price": 200
+    },
+    {
+      "id": 2,
+      "title": "aktan",
+      "price": 200
+    },
+    {
+      "id": 3,
+      "title": "aktan",
+      "price": 200
+    },
+    {
+      "id": 4,
+      "title": "aktan",
+      "price": 200
+    },
+    {
+      "id": 5,
+      "title": "aktan",
+      "price": 200
+    }
+  ],
+  "cart":[
+    
+  ]
+
+}

@@ -1,24 +1,19 @@
-import React, { ReactNode, useState } from "react";
+import {
+  Box,
+  chakra,
+  Container,
+  Link,
+  SimpleGrid,
+  Stack,
+  Text,
+  VisuallyHidden,
+  Input,
+  IconButton,
+  useColorModeValue,
+} from "@chakra-ui/react";
+import { ReactNode } from "react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { BiMailSend } from "react-icons/bi";
-
-interface Props {
-  children: ReactNode;
-}
-
-const Logo = (props: Props) => {
-  return (
-    <svg
-      height={32}
-      viewBox="0 0 120 28"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <path d="M3" fill="currentColor" />
-      <path d="M26" fill="#2F855A" />
-    </svg>
-  );
-};
 
 const SocialButton = ({
   children,
@@ -30,120 +25,123 @@ const SocialButton = ({
   href: string;
 }) => {
   return (
-    <button
-      style={{
-        background: "rgba(0, 0, 0, 0.1)",
-        borderRadius: "9999px",
-        width: "32px",
-        height: "32px",
-        cursor: "pointer",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "background 0.3s ease",
+    <chakra.button
+      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+      rounded={"full"}
+      w={8}
+      h={8}
+      cursor={"pointer"}
+      as={"a"}
+      href={href}
+      display={"inline-flex"}
+      alignItems={"center"}
+      justifyContent={"center"}
+      transition={"background 0.3s ease"}
+      _hover={{
+        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
       }}
-    //   
     >
+      <VisuallyHidden>{label}</VisuallyHidden>
       {children}
-    </button>
+    </chakra.button>
   );
 };
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <h2
-      style={{ fontWeight: 500, fontSize: "1.125rem", marginBottom: "0.5rem" }}
-    >
+    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
       {children}
-    </h2>
+    </Text>
   );
 };
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const handleSubscribe = () => {
-    console.log(`Subscribing email: ${email}`);
-  };
   return (
-    <div style={{ backgroundColor: "#F7FAFC", color: "#1A202C" }}>
-      <div style={{ maxWidth: "72rem", padding: "2.5rem" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-          }}
+    <Box
+      bg={useColorModeValue("#009B95", "#009B95")}
+      color={useColorModeValue("gray.700", "gray.200")}
+    >
+      <Container as={Stack} maxW={"6xl"} py={10}>
+        <SimpleGrid
+          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
+          spacing={8}
         >
-          <div style={{ marginRight: "1rem" }}>
-           
-            <small style={{ fontSize: "0.875rem" }}>
-              © 2022 Chakra Templates. All rights reserved
-            </small>
-            <div style={{ display: "flex", marginTop: "1rem" }}>
-              <SocialButton label="Twitter" href="#">
+          <Stack spacing={6}>
+            <Text fontSize={"sm"} color={"white"}>
+              Новинок, скидок и выгодных предложений
+            </Text>
+            <Stack direction={"row"} spacing={6}>
+              <SocialButton label={"Twitter"} href={"#"}>
                 <FaTwitter />
               </SocialButton>
-              <SocialButton label="YouTube" href="#">
+              <SocialButton label={"YouTube"} href={"#"}>
                 <FaYoutube />
               </SocialButton>
-              <SocialButton label="Instagram" href="#">
+              <SocialButton label={"Instagram"} href={"#"}>
                 <FaInstagram />
               </SocialButton>
-            </div>
-          </div>
-          <div style={{ marginRight: "1rem" }}>
+            </Stack>
+          </Stack>
+          <Stack align={"flex-start"}>
             <ListHeader>Company</ListHeader>
-            <a href="#">About us</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact us</a>
-            <a href="#">Pricing</a>
-            <a href="#">Testimonials</a>
-          </div>
-          <div style={{ marginRight: "1rem" }}>
+            <Link href={"#"} color={"white"}>
+              About us
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Blog
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Contact us
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Pricing
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Testimonials
+            </Link>
+          </Stack>
+          <Stack align={"flex-start"}>
             <ListHeader>Support</ListHeader>
-            <a href="#">Help Center</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Legal</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Satus</a>
-          </div>
-          <div></div>
-          <h2>Stay up to date</h2>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <input
-              type="text"
-              placeholder="Your email address"
-              value={email}
-              onChange={handleEmailChange}
-              style={{
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-                border: 0,
-                padding: "0.5rem",
-                marginRight: "0.5rem",
-                width: "100%",
-              }}
-            />
-            <button
-              onClick={handleSubscribe}
-              style={{
-                backgroundColor: "green",
-                color: "white",
-                padding: "0.5rem",
-                borderRadius: "4px",
-                cursor: "pointer",
-              }}
-            >
-              <BiMailSend />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+            <Link href={"#"} color={"white"}>
+              Help Center
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Terms of Service
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Legal
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Privacy Policy
+            </Link>
+            <Link href={"#"} color={"white"}>
+              Satus
+            </Link>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <ListHeader>Stay up to date</ListHeader>
+            <Stack direction={"row"}>
+              <Input
+                placeholder={"Your email address"}
+                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
+                border={0}
+                _focus={{
+                  bg: "whiteAlpha.300",
+                }}
+              />
+              <IconButton
+                bg={useColorModeValue("green.400", "green.800")}
+                color={useColorModeValue("white", "gray.800")}
+                _hover={{
+                  bg: "green.600",
+                }}
+                aria-label="Subscribe"
+                icon={<BiMailSend />}
+              />
+            </Stack>
+          </Stack>
+        </SimpleGrid>
+      </Container>
+    </Box>
   );
 }
-// export default Footer;
