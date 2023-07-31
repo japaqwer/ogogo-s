@@ -5,6 +5,7 @@ import CardOne from "@/components/Home/CardOne";
 import CardTwo from "@/components/Home/Cardtwo";
 import CardThree from "@/components/Home/CardThree";
 import { Product } from "@/components/Products/Product";
+import { Basket } from "@/components/Basket/Basket";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,8 @@ export default function Home() {
       <CardOne/>
       <CardTwo/>
       <CardThree/>
-      <Product/>
+      {/* <Product/> */}
+      {/* <Basket/> */}
 
       
     </>

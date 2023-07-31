@@ -1,7 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { ProductCard } from "./ProductCard";
-import { products } from "./_data";
+import { productTest } from "./_data";
 import { ProductGrid } from "./ProductGrid";
+
 
 export const Product = () => (
   <Box
@@ -11,7 +12,7 @@ export const Product = () => (
     py={{ base: "6", md: "8", lg: "12" }}
   >
     <ProductGrid>
-      {products.map((product) => (
+      {productTest().map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </ProductGrid>

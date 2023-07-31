@@ -25,7 +25,8 @@ interface Props {
 
 export const ProductCard = (props: Props) => {
   const { product, rootProps } = props;
-  const { name, imageUrl, price, salePrice, rating } = product;
+  console.log(product)
+  const { name, imageUrl, price, salePrice, rating, description } = product;
   return (
     <Stack spacing={{ base: "3", md: "3" }} {...rootProps}>
       <Box position="relative">
@@ -60,16 +61,25 @@ export const ProductCard = (props: Props) => {
         <HStack>
           {/* <Rating defaultValue={rating} size="sm" /> */}
           <Text fontSize="xs" color={useColorModeValue("gray.600", "gray.400")}>
-            Apple M1 chip with 8‑core CPUВидеокартаIntegrated 7-core – 8-core
-            GPURAM8GB – 16GB unified
+            {description}
           </Text>
         </HStack>
       </Stack>
-      <Flex align="center">
-        <Button bg={"#009B95"} color={"white"} width="full">
+      <Flex align="center" gap={"15px"} bottom={0}>
+        <Button
+          bg={"#009B95"}
+          color={"white"}
+          width="full"
+          bottom={0}
+        >
           В корзину
         </Button>
-        <Button bg={"#009B95"} color={"white"} width="full">
+        <Button
+          bg={"#009B95"}
+          color={"white"}
+          width="full"
+          bottom={0}
+        >
           купить
         </Button>
         {/* <Link

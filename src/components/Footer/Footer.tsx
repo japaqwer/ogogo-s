@@ -58,6 +58,7 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 export default function Footer() {
   return (
     <Box
+    bottom={0}
       bg={useColorModeValue("#009B95", "#009B95")}
       color={useColorModeValue("gray.700", "gray.200")}
     >

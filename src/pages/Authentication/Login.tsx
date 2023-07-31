@@ -1,23 +1,64 @@
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import axios from "axios";
 import {
-  Flex,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
   Button,
+  Flex,
   Heading,
+  Input,
+  Link,
+  Stack,
   Text,
   useColorModeValue,
-  InputGroup,
-  InputLeftAddon,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+// import { useHistory } from "react-router-dom";
 
-export default function Login() {
+interface State {
+  email_or_phone_number: string;
+  password: string;
+}
+
+const Login: React.FC = () => {
+  const [state, setState] = useState<State>({
+    email_or_phone_number: "",
+    password: "",
+  });
+
+  // const history = useHistory()
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const { email_or_phone_number, password } = state;
+    const url = "http://127.0.0.1:8000/api/users/login/";
+
+    axios
+      .post(url, { email_or_phone_number, password })
+      .then((res) => {
+        console.log("Login successful");
+        // Additional actions after successful login
+
+        // Redirect to the homepage
+        router.push("/");
+      })
+      .catch((err) => {
+        console.log("Invalid email or password");
+        // Handling login errors
+      });
+
+    console.log(state);
+  };
+
   return (
-    <Box>
+    <Box rounded={"lg"} boxShadow={"lg"} p={8}>
       <Flex
         minH={"70vh"}
         align={"center"}
@@ -39,53 +80,30 @@ export default function Login() {
                 Войдите,указав свою электронную почту
               </Text>
             </Stack>
-            <Stack spacing={4} mt={9}>
-              <FormControl id="email">
-                <FormLabel color={"rgba(0, 0, 0, 0.4)"}>Телефон</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon
-                    children="+996"
-                    borderColor={"black"}
-                    _hover={{ borderColor: "black" }}
-                    typeof="number"
-                    color={"black"}
-                  />
-                  <Input
-                    type="numder"
-                    color={"black"}
-                    borderColor={"black"}
-                    _hover={{ borderColor: "black" }}
-                  />
-                </InputGroup>
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel color={"rgba(0, 0, 0, 0.4)"}>Пароль</FormLabel>
 
+            <form onSubmit={handleSubmit}>
+              <Box mt={8}>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  id="email_or_phone_number"
+                  value={state.email_or_phone_number}
+                  onChange={handleChange}
+                  required
+                />
+              </Box>
+              <Box mt={8}>
                 <Input
                   type="password"
-                  color={"black"}
-                  borderColor={"black"}
-                  _hover={{ borderColor: "black" }}
+                  placeholder="Password"
+                  id="password"
+                  value={state.password}
+                  onChange={handleChange}
+                  required
                 />
-              </FormControl>
-              <Stack spacing={5}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                >
-                  <Link fontSize={"15px"} color={"#009B95"}>
-                    Забыли пароль?
-                  </Link>
-                </Stack>
-                <Button
-                  bg={"#009B95"}
-                  color={"blax"}
-                  _hover={{
-                    bg: "#009B95",
-                  }}
-                >
-                  Войти
-                </Button>
+              </Box>
+              <Flex justifyContent="space-between" mt={8}>
+                <Button type="submit">Login</Button>
                 <Link
                   href="/Authentication/Register"
                   fontSize={"15px"}
@@ -93,11 +111,13 @@ export default function Login() {
                 >
                   Зарегистрироваться
                 </Link>
-              </Stack>
-            </Stack>
+              </Flex>
+            </form>
           </Box>
         </Stack>
       </Flex>
     </Box>
   );
-}
+};
+
+export default Login;

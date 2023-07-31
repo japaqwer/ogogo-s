@@ -1,204 +1,146 @@
-"use client"
 
-import React, { useState } from "react";
-import {
-  InputGroup,
-  InputRightElement,
-  Checkbox,
-  Text,
-  Box,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Button,
-  Image,
-  HStack,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
-import {
-  Formik,
-  Field,
-  Form,
-  ErrorMessage,
-  FormikValues,
-  FormikHelpers,
-} from "formik";
-// import { RootState } from "../store";
-import * as Yup from "yup";
-import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-// import { AuthState, registrationAsync } from "./auth/auth.slice";
+import React, { ChangeEvent, FormEvent } from "react";
+import axios from "axios";
+import { Box, Button, Flex, Heading, Input, Link, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+// import { Button } from "reactstrap";
 
-// Валидационная схема с использованием Yup
-const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Поле "username" обязательно для заполнения'),
-  email: Yup.string()
-    .email("Некорректный адрес электронной почты")
-    .required('Поле "Email" обязательно для заполнения'),
-  password: Yup.string().required('Поле "Пароль" обязательно для заполнения'),
-});
-
-const initialValues = {
-  username: "",
-  email: "",
-  password: "",
-};
-interface AppState {
-  auth: {
-    isAuth: boolean;
-  };
+interface State {
+  email: string;
+  password: string;
+  name: string;
+  phone_number: string;
+  is_active: boolean;
 }
 
-const RegistrationForm = () => {
-  // const isAuth: boolean = useSelector((state: RootState) => state.auth.isAuth);
-const isAuth: boolean = useSelector((state: AppState) => state.auth.isAuth);
-  const dispatch = useDispatch();
-
-  const handleRegistration = async (username: any, email: any, password: any) => {
-    const credentials = {
-      username: username,
-      email: email,
-      password: password,
-    };
-    try {
-      // await dispatch(registrationAsync(credentials));
-    } catch (error) {
-      // Обработка ошибки входа
-    }
+class Register extends React.Component<{}, State> {
+  state: State = {
+    email: "",
+    password: "",
+    name: "",
+    phone_number: "",
+    is_active: false,
   };
 
-  const [isRobot, setIsRobot] = useState(false);
-  const [show, setShow] = useState(false);
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    this.setState({
+      ...this.state,
+      [e.target.id]: value,
+    } as Pick<State, keyof State>);
+  };
 
-  const handleClick = () => setShow(!show);
- const handleSubmit = (
-   values: any,
-   { setSubmitting }: FormikHelpers<FormikValues>
- ) => {
-   handleRegistration(values.username, values.email, values.password);
-   console.log(values);
-   setSubmitting(false);
- };
 
-  return (
-    <Box>
-      {!isAuth && (
-        <Grid templateColumns="1fr 1fr" gap={6}>
-          <GridItem flex={1} mr={4}>
-            <Image src="/login_icon.svg" alt="Image" objectFit="cover" />
-          </GridItem>
-          <GridItem flex={1}>
-            <Text fontSize={24} mb={3}>
-              Sign up
-            </Text>
-            <HStack spacing={4} mb={4}>
-              <Button colorScheme="blue" leftIcon={<FaFacebook />}>
-                Facebook
-              </Button>
-              <Button colorScheme="red" leftIcon={<FaGoogle />}>
-                Google
-              </Button>
-              <Button colorScheme="teal" leftIcon={<FaGithub />}>
-                GitHub
-              </Button>
-            </HStack>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
+  handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const data = {
+      email: this.state.email,
+      password: this.state.password,
+      name: this.state.name,
+      phone_number: this.state.phone_number,
+      is_active: this.state.is_active,
+    };
+    let url = "http://127.0.0.1:8000/api/users/register/";
+    axios
+      .post(url, data)
+      .then((res) => {
+        console.log(res.data);
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+
+    console.log(data);
+  };
+
+  render() {
+    return (
+      <Box
+        rounded={"lg"}
+        // bg={"white"}
+        boxShadow={"lg"}
+        p={8}
+      >
+        <Flex
+          minH={"70vh"}
+          align={"center"}
+          justify={"center"}
+          // bg={useColorModeValue("white", "white")}
+        >
+          <Stack spacing={8} mx={"auto"} maxW={"lg"} py={6} px={3}>
+            <Box
+              rounded={"lg"}
+              // bg={useColorModeValue("white", "white")}
+              boxShadow={"lg"}
+              p={8}
             >
-              {({ isSubmitting }) => (
-                <Form>
-                  <Field name="username">
-                    {({ field, form }) => (
-                      <FormControl
-                        isInvalid={
-                          form.errors.username && form.touched.username
-                        }
-                      >
-                        <FormLabel htmlFor="username">Username</FormLabel>
-                        <Input
-                          {...field}
-                          id="username"
-                          placeholder="Придумайте себе username"
-                        />
-                        <ErrorMessage
-                          name="username"
-                          component={FormErrorMessage}
-                        />
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name="email">
-                    {({ field, form }) => (
-                      <FormControl
-                        isInvalid={form.errors.email && form.touched.email}
-                      >
-                        <FormLabel htmlFor="email">Email</FormLabel>
-                        <Input
-                          {...field}
-                          id="email"
-                          placeholder="Введите ваш email"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component={FormErrorMessage}
-                        />
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name="password">
-                    {({ field, form }) => (
-                      <FormControl
-                        isInvalid={
-                          form.errors.password && form.touched.password
-                        }
-                      >
-                        <FormLabel htmlFor="password">Пароль</FormLabel>
-                        <InputGroup display={"flex"}>
-                          <Input
-                            {...field}
-                            type={show ? "text" : "password"}
-                            id="password"
-                            placeholder="Введите ваш пароль"
-                          />
-                          <InputRightElement width="4.5rem">
-                            <Button h="1.75rem" size="sm" onClick={handleClick}>
-                              {show ? "Hide" : "Show"}
-                            </Button>
-                          </InputRightElement>
-                        </InputGroup>
-                        <ErrorMessage
-                          name="password"
-                          component={FormErrorMessage}
-                        />
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Box display={"flex"} alignItems={"center"}>
-                    {/* <ReCAPTCHA
-                      sitekey="6LeiJwsmAAAAAGsTE7-NTOABQx1HcbvUNZ1_KvoU"
-                      onChange={(value) => setIsRobot(!!value)}
-                    /> */}
-                  </Box>
-                  <Button
-                    mt={4}
-                    colorScheme="teal"
-                    isLoading={isSubmitting}
-                    type="submit"
+              <Stack align={"center"}>
+                <Heading fontSize={"4xl"} color={"black"}>
+                  Логин
+                </Heading>
+                <Text fontSize={"lg"} color={"gray.600"} align={"center"}>
+                  Войдите,указав свою электронную почту
+                </Text>
+              </Stack>
+              <form onSubmit={this.handleSubmit}>
+                <Box mt={8}>
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    id="email"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Box>
+                <Box mt={8}>
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    id="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Box>
+                <Box mt={8}>
+                  <Input
+                    type="text"
+                    placeholder="Name"
+                    id="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Box>
+                <Box mt={8}>
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number"
+                    id="phone_number"
+                    value={this.state.phone_number}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </Box>
+                <Flex justifyContent="space-between" alignItems="center" mt={8}>
+                  <Button type="submit">Register</Button>
+                  <Link
+                    href="/Authentication/Login"
+                    fontSize={"15px"}
+                    color={"#009B95"}
                   >
-                    Войти
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          </GridItem>
-        </Grid>
-      )}
-    </Box>
-  );
-};
+                    Уже есть аккаунт
+                  </Link>
+                </Flex>
+              </form>
+            </Box>
+          </Stack>
+        </Flex>
+      </Box>
+    );
+  }
+}
 
-export default RegistrationForm;
+export default Register;

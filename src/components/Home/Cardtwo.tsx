@@ -44,74 +44,82 @@ function CardTwo() {
             </Box>
           </Box>
         </Box>
-        <Grid templateColumns={["1fr", "1fr", "2fr 1fr"]} gap={4}>
-          <Flex
-            direction={["column", "row"]}
+        <Box gap={4}>
+          <Flex>
+            <Flex
+              direction={["column", "row"]}
+              mb={4}
+              p={4}
+              borderRadius="10px"
+              boxShadow="-1px 0px 9px rgba(0, 0, 0, 0.1), 1px 1px 9px rgba(0, 0, 0, 0.05)"
+            >
+              <Box mr={[0, 4]} mb={[4, 0]}>
+                <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
+                  Mac
+                </Text>
+                <Link href="#" color={"#009B95"}>
+                  Подробнее
+                </Link>
+                <Image
+                  boxSize={["100%", "200px"]}
+                  // objectFit="cover"
+                  src="/images/mac.png"
+                  alt="Dan Abramov"
+                />
+              </Box>
+            </Flex>
+            <Flex
+              direction={["column", "row"]}
+              mb={4}
+              p={4}
+              borderRadius="10px"
+              boxShadow="-1px 0px 9px rgba(0, 0, 0, 0.1), 1px 1px 9px rgba(0, 0, 0, 0.05)"
+            >
+              <Box mr={[0, 4]} mb={[4, 0]}>
+                <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
+                  Сумки
+                </Text>
+                <Link href="#" color={"#009B95"}>
+                  Подробнее
+                </Link>
+                <Image
+                  boxSize={["100%", "180px"]}
+                  objectFit="cover"
+                  // src="https://bit.ly/dan-abramov"
+                  src="/images/mac.png"
+                  alt="Dan Abramov"
+                />
+              </Box>
+            </Flex>
+          </Flex>
+
+          <Box
+            ml={[0, 4]}
             mb={4}
             p={4}
             borderRadius="10px"
             boxShadow="-1px 0px 9px rgba(0, 0, 0, 0.1), 1px 1px 9px rgba(0, 0, 0, 0.05)"
           >
-            <Box mr={[0, 4]} mb={[4, 0]}>
-              <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
-                Mac
-              </Text>
-              <Link href="#" color={"#009B95"}>
-                Подробнее
-              </Link>
-              <Image
-                boxSize={["100%", "200px"]}
-                // objectFit="cover"
-                src="/images/mac.png"
-                alt="Dan Abramov"
-              />
-            </Box>
-          </Flex>
-          <Flex
-            direction={["column", "row"]}
-            mb={4}
-            p={4}
-            borderRadius="10px"
-            boxShadow="-1px 0px 9px rgba(0, 0, 0, 0.1), 1px 1px 9px rgba(0, 0, 0, 0.05)"
-          >
-            <Box mr={[0, 4]} mb={[4, 0]}>
-              <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
-                Сумки
-              </Text>
-              <Link href="#" color={"#009B95"}>
-                Подробнее
-              </Link>
-              <Image
-                boxSize={["100%", "180px"]}
-                objectFit="cover"
-                src="https://bit.ly/dan-abramov"
-                alt="Dan Abramov"
-              />
-            </Box>
-          </Flex>
-          <Flex
-            direction={["column", "row"]}
-            mb={4}
-            p={4}
-            borderRadius="10px"
-            boxShadow="-1px 0px 9px rgba(0, 0, 0, 0.1), 1px 1px 9px rgba(0, 0, 0, 0.05)"
-          >
-            <Box ml={[0, 4]}>
-              <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
-                Планшеты
-              </Text>
-              <Link href="#" color={"#009B95"}>
-                Подробнее
-              </Link>
-              <Image
-                boxSize={["100%", "180px"]}
-                objectFit="cover"
-                src="/images/ipad.png"
-                alt="Dan Abramov"
-              />
-            </Box>
-          </Flex>
-        </Grid>
+            <Flex>
+              <Box>
+                <Text fontSize={["lg", "md"]} fontWeight="bold" mb={2}>
+                  Планшеты
+                </Text>
+                <Link href="#" color={"#009B95"}>
+                  Подробнее
+                </Link>
+              </Box>
+              <Box>
+                <Image
+                  boxSize={["100%", "180px"]}
+                  objectFit="cover"
+                  src="/images/ipad.png"
+                  alt="Dan Abramov"
+                />
+              </Box>
+            </Flex>
+          </Box>
+        </Box>
 
         <Box
           borderRadius="10px"
